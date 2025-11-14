@@ -894,7 +894,7 @@ local function CreateBarInstance(config, parent)
         local data = SenseiClassResourceBarDB[self.config.dbName][layoutName]
 
         local v = _G["EssentialCooldownViewer"]
-        if v and not v._SCRB_Essential_hooked then
+        if v and not SenseiClassResourceBarDB[self.config.dbName][layoutName]._SCRB_Essential_hooked then
             v:HookScript("OnSizeChanged", function()
                 if data.widthMode == "Sync With Essential Cooldowns" then
                     self:ApplyLayout(layoutName)
@@ -910,11 +910,11 @@ local function CreateBarInstance(config, parent)
                     self:ApplyLayout(layoutName)
                 end
             end)
-            v._SCRB_Essential_hooked = true
+            SenseiClassResourceBarDB[self.config.dbName][layoutName]._SCRB_Essential_hooked = true
         end
 
         v = _G["UtilityCooldownViewer"]
-        if v and not v._SCRB_Utility_hooked then
+        if v and not SenseiClassResourceBarDB[self.config.dbName][layoutName]._SCRB_Utility_hooked then
             v:HookScript("OnSizeChanged", function(_, width)
                 if data.widthMode == "Sync With Utility Cooldowns" then
                     self:ApplyLayout(layoutName)
@@ -931,7 +931,7 @@ local function CreateBarInstance(config, parent)
                     self:ApplyLayout(layoutName)
                 end
             end)
-            v._SCRB_Utility_hooked = true
+            SenseiClassResourceBarDB[self.config.dbName][layoutName]._SCRB_Utility_hooked = true
         end
     end
 
