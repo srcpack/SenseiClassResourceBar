@@ -1024,7 +1024,7 @@ local function CreateBarInstance(config, parent)
 
     frame:SetScript("OnEvent", function(self, event, arg1)
         if event == "PLAYER_LOGIN" then
-            
+
             self:InitCooldownManagerWidthHook()
 
         elseif event == "PLAYER_ENTERING_WORLD"
@@ -1087,9 +1087,9 @@ local function BuildLemSettings(config, frame)
             name = "Bar Size",
             kind = LEM.SettingType.Slider,
             default = defaults.scale,
-            minValue = 0.5,
+            minValue = 0.25,
             maxValue = 2,
-            valueStep = 0.1,
+            valueStep = 0.01,
             formatter = function(value)
                 return string.format("%d%%", value * 100)
             end,
