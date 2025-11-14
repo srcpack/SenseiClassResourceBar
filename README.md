@@ -1,6 +1,6 @@
 # 🌀 **Sensei Class Resource Bar**
 
-[![GitHub Release](https://img.shields.io/github/v/release/Snsei987/SenseiClassResourceBar?style=for-the-badge)](https://github.com/Snsei987/SenseiClassResourceBar/releases/latest) ![CurseForge Game Versions](https://img.shields.io/curseforge/game-versions/1383623?style=for-the-badge&logo=battledotnet) [![CurseForge Downloads](https://img.shields.io/curseforge/dt/1383623?style=for-the-badge&logo=curseforge&label=Downloads)](https://www.curseforge.com/wow/addons/rpglootfeed)
+[![GitHub Release](https://img.shields.io/github/v/release/Snsei987/SenseiClassResourceBar?style=for-the-badge)](https://github.com/Snsei987/SenseiClassResourceBar/releases/latest) ![CurseForge Game Versions](https://img.shields.io/curseforge/game-versions/1383623?style=for-the-badge&logo=battledotnet) [![CurseForge Downloads](https://img.shields.io/curseforge/dt/1383623?style=for-the-badge&logo=curseforge&label=Downloads)](https://www.curseforge.com/wow/addons/senseiclassresourcebar)
 
 **Sensei Class Resource Bar** is a lightweight, fully customizable resource display addon for World of Warcraft.  
 It automatically adapts to your character’s **class, specialization, and shapeshift form**, showing your **primary** and **secondary** resources in clean, modern bars that you can freely move, resize, and restyle through **Edit Mode**.
