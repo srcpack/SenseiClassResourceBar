@@ -25,6 +25,7 @@ local commonDefaults = {
     font = "Fonts\\FRIZQT__.TTF",
     fontSize = 12,
     fontOutline = "OUTLINE",
+    textAlign = "CENTER",
     enabled = true,
     maskAndBorderStyle = "Thin",
     backgroundStyle = "Semi-transparent",
@@ -207,8 +208,10 @@ barConfigs.secondary = {
         local _, class = UnitClass("player")
         local secondaryResources = {
             ["DEATHKNIGHT"] = Enum.PowerType.Runes,
+            ["DEMONHUNTER"] = nil,
             ["DRUID"]       = nil, -- Through code
             ["EVOKER"]      = Enum.PowerType.Essence,
+            ["HUNTER"]      = nil,
             ["MAGE"]        = nil, -- Through code
             ["MONK"]        = nil, -- Through code
             ["PALADIN"]     = Enum.PowerType.HolyPower,
@@ -216,6 +219,7 @@ barConfigs.secondary = {
             ["ROGUE"]       = Enum.PowerType.ComboPoints,
             ["SHAMAN"]      = nil, -- Through code
             ["WARLOCK"]     = Enum.PowerType.SoulShards,
+            ["WARRIOR"]     = nil,
         }
 
         local specID = GetSpecialization()
@@ -476,6 +480,19 @@ local function CreateBarInstance(config, parent)
         self.textValue:SetFont(font, size, outline)
         self.textValue:SetShadowColor(0, 0, 0, 0.8)
         self.textValue:SetShadowOffset(1, -1)
+        
+        -- Text alignment: LEFT, CENTER, RIGHT
+        local align = data.textAlign or defaults.textAlign or "CENTER"
+        self.textValue:SetJustifyH(align)
+        -- Re-anchor the text inside the text frame depending on alignment
+        self.textValue:ClearAllPoints()
+        if align == "LEFT" then
+            self.textValue:SetPoint("LEFT", self.textFrame, "LEFT", 4, 0)
+        elseif align == "RIGHT" then
+            self.textValue:SetPoint("RIGHT", self.textFrame, "RIGHT", -4, 0)
+        else
+            self.textValue:SetPoint("CENTER", self.textFrame, "CENTER", 0, 0)
+        end
     end
 
     function frame:ApplyMaskAndBorderSettings(layoutName)
@@ -907,6 +924,25 @@ local function BuildLemSettings(config, frame)
             set = function(layoutName, value)
                 SenseiClassResourceBarDB[config.dbName][layoutName] = SenseiClassResourceBarDB[config.dbName][layoutName] or CopyTable(defaults)
                 SenseiClassResourceBarDB[config.dbName][layoutName].fontOutline = value
+                frame:ApplyFontSettings(layoutName)
+            end,
+        },
+        {
+            order = 53,
+            name = "Text Alignment",
+            kind = LEM.SettingType.Dropdown,
+            default = defaults.textAlign,
+            values = {
+                { text = "LEFT" },
+                { text = "CENTER" },
+                { text = "RIGHT" },
+            },
+            get = function(layoutName)
+                return (SenseiClassResourceBarDB[config.dbName][layoutName] and SenseiClassResourceBarDB[config.dbName][layoutName].textAlign) or defaults.textAlign
+            end,
+            set = function(layoutName, value)
+                SenseiClassResourceBarDB[config.dbName][layoutName] = SenseiClassResourceBarDB[config.dbName][layoutName] or CopyTable(defaults)
+                SenseiClassResourceBarDB[config.dbName][layoutName].textAlign = value
                 frame:ApplyFontSettings(layoutName)
             end,
         },
