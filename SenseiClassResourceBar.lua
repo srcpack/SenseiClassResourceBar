@@ -910,7 +910,7 @@ local function BuildLemSettings(config, frame)
         },
         {
             order = 60,
-            name = "Mask & Border Style",
+            name = "Border Style",
             kind = LEM.SettingType.Dropdown,
             default = defaults.maskAndBorderStyle,
             values = availableMaskAndBorderStyles,
