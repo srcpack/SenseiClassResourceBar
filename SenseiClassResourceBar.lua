@@ -259,7 +259,11 @@ barConfigs.primary = {
                 default = defaults.showManaAsPercent,
                 get = function(layoutName)
                     local data = SenseiClassResourceBarDB[dbName][layoutName]
-                    return data and data.showManaAsPercent or false
+                    if data and data.showManaAsPercent ~= nil then
+                        return data.showManaAsPercent
+                    else
+                        return defaults.showManaAsPercent
+                    end
                 end,
                 set = function(layoutName, value)
                     SenseiClassResourceBarDB[dbName][layoutName] = SenseiClassResourceBarDB[dbName][layoutName] or CopyTable(defaults)
@@ -379,7 +383,11 @@ barConfigs.secondary = {
                 default = defaults.showFragmentedPowerBarText,
                 get = function(layoutName)
                     local data = SenseiClassResourceBarDB[dbName][layoutName]
-                    return data and data.showFragmentedPowerBarText ~= false
+                    if data and data.showFragmentedPowerBarText ~= nil then
+                        return data.showFragmentedPowerBarText
+                    else
+                        return defaults.showFragmentedPowerBarText
+                    end
                 end,
                 set = function(layoutName, value)
                     SenseiClassResourceBarDB[dbName][layoutName] = SenseiClassResourceBarDB[dbName][layoutName] or CopyTable(defaults)
@@ -1195,7 +1203,11 @@ local function BuildLemSettings(config, frame)
             default = defaults.smoothProgress,
             get = function(layoutName)
                 local data = SenseiClassResourceBarDB[config.dbName][layoutName]
-                return data and data.smoothProgress or defaults.smoothProgress
+                if data and data.smoothProgress ~= nil then
+                    return data.smoothProgress
+                else
+                    return defaults.smoothProgress
+                end
             end,
             set = function(layoutName, value)
                 SenseiClassResourceBarDB[config.dbName][layoutName] = SenseiClassResourceBarDB[config.dbName][layoutName] or CopyTable(defaults)
@@ -1214,7 +1226,11 @@ local function BuildLemSettings(config, frame)
             default = defaults.showText,
             get = function(layoutName)
                 local data = SenseiClassResourceBarDB[config.dbName][layoutName]
-                return data and data.showText ~= false
+                if data and data.showText ~= nil then
+                    return data.showText
+                else
+                    return defaults.showText
+                end
             end,
             set = function(layoutName, value)
                 SenseiClassResourceBarDB[config.dbName][layoutName] = SenseiClassResourceBarDB[config.dbName][layoutName] or CopyTable(defaults)
