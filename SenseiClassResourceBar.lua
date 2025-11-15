@@ -717,9 +717,8 @@ local function CreateBarInstance(config, parent)
         local font = data.font or defaults.font
         local size = data.fontSize or defaults.fontSize
         local outline = data.fontOutline or defaults.fontOutline
-        local scale = data.scale or defaults.scale
 
-        self.textValue:SetFont(font, size * scale, outline)
+        self.textValue:SetFont(font, size, outline)
         self.textValue:SetShadowColor(0, 0, 0, 0.8)
         self.textValue:SetShadowOffset(1, -1)
 
