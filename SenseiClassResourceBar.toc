@@ -2,10 +2,11 @@
 ## Title: Sensei Class Resource Bar
 ## Notes: Separate resource bar for some classes
 ## Author: Sensei
-## Version: 1.0
+## Version: @project-version@
+## IconTexture: Interface\AddOns\SenseiClassResourceBar\Textures\icon-texture.png
 ## SavedVariables: SenseiClassResourceBarDB
 
-## X-Curse-Project-ID: 1383623
+## X-Curse-Project-ID: @project-id@
 
 Libs\LibStub\LibStub.lua
 Libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
