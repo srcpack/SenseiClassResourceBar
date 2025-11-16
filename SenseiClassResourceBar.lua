@@ -201,7 +201,8 @@ local barConfigs = {}
 -- PRIMARY RESOURCE BAR
 barConfigs.primary = {
     dbName = "PrimaryResourceBarDB",
-    name = "Primary Resource Bar",
+    editModeName = "Primary Resource Bar",
+    frameName = "PrimaryResourceBar",
     frameLevel = 2,
     defaultValues = {
         point = "CENTER",
@@ -303,7 +304,8 @@ barConfigs.primary = {
 -- SECONDARY RESOURCE BAR
 barConfigs.secondary = {
     dbName = "SecondaryResourceBarDB",
-    name = "Secondary Resource Bar",
+    editModeName = "Secondary Resource Bar",
+    frameName = "SecondaryResourceBar",
     frameLevel = 1,
     defaultValues = {
         point = "CENTER",
@@ -498,7 +500,8 @@ barConfigs.secondary = {
 -- HEALTH BAR
 barConfigs.healthBar = {
     dbName = "healthBarDB",
-    name = "Health Bar",
+    editModeName = "Health Bar",
+    frameName = "HealthBar",
     frameLevel = 0,
     defaultValues = {
         point = "CENTER",
@@ -584,10 +587,11 @@ local function CreateBarInstance(config, parent, frameLevel)
     end
 
     -- Create frame
-    local frame = CreateFrame("Frame", config.name, parent or UIParent)
+    local frame = CreateFrame("Frame", config.frameName, parent or UIParent)
     frame:SetFrameLevel(frameLevel)
     frame.config = config
-    frame.barName = config.name
+    frame.barName = frame:GetName()
+    frame.editModeName = config.editModeName
 
     -- BACKGROUND
     frame.background = frame:CreateTexture(nil, "BACKGROUND")
@@ -697,7 +701,7 @@ local function CreateBarInstance(config, parent, frameLevel)
         self.statusBar:SetAlpha(0)
 
         local r, g, b = self.statusBar:GetStatusBarColor()
-        local color = { r = r, g = g, b = b}
+        local color = { r = r, g = g, b = b }
 
         if resource == Enum.PowerType.Runes then
             -- Collect rune states: ready and recharging
@@ -1888,7 +1892,7 @@ local function InitializeBar(config, frameLevel)
     end
 
     local frame = CreateBarInstance(config, UIParent, math.max(0, frameLevel or 0))
-    barInstances[config.name] = frame
+    barInstances[config.frameName] = frame
 
     local function OnPositionChanged(frame, layoutName, point, x, y)
         SenseiClassResourceBarDB[config.dbName][layoutName] = SenseiClassResourceBarDB[config.dbName][layoutName] or CopyTable(defaults)
