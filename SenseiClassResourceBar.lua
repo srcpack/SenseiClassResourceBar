@@ -404,12 +404,8 @@ barConfigs.secondary = {
             local _, max = DemonHunterSoulFragmentsBar:GetMinMaxValues() -- Secret values
 
             if not frame._SCRB_Soul_Fragments_hooked then
-                frame:SetScript("OnUpdate", function(_, delta)
-                    frame.elapsed = frame.elapsed + delta
-                    if frame.elapsed >= frame.updateInterval then
-                        frame.elapsed = 0
-                        frame:UpdateDisplay()
-                    end
+                hooksecurefunc(DemonHunterSoulFragmentsBar, "SetValue", function()
+                    frame:UpdateDisplay()
                 end)
 
                 frame._SCRB_Soul_Fragments_hooked = true
@@ -615,12 +611,8 @@ barConfigs.tertiary = {
             local _, max = EvokerEbonMightBar:GetMinMaxValues() -- Secret values
 
             if not frame._SCRB_Ebon_Might_hooked then
-                frame:SetScript("OnUpdate", function(_, delta)
-                    frame.elapsed = frame.elapsed + delta
-                    if frame.elapsed >= frame.updateInterval then
-                        frame.elapsed = 0
-                        frame:UpdateDisplay()
-                    end
+                hooksecurefunc(EvokerEbonMightBar, "SetValue", function()
+                    frame:UpdateDisplay()
                 end)
 
                 frame._SCRB_Ebon_Might_hooked = true
@@ -798,8 +790,6 @@ local function CreateBarInstance(config, parent, frameLevel)
 
     -- STATE
     frame.smoothEnabled = false
-    frame.updateInterval = 0.1
-    frame.elapsed = 0
 
     -- Fragmented powers (Runes, Essences) specific visual elements
     frame.FragmentedPowerBars = {}

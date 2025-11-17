@@ -30,7 +30,9 @@ Mana, Rage, Energy, Focus, Fury, Runic Power, Astral Power, and more.
 *   **Evoker** → Essence
 *   **Mage** → Arcane Charges
 *   **Druid** → Combo Points (Cat Form)
-*   **Demon Hunter** → Soul (Devourer)
+*   **Demon Hunter** → Soul (Devourer) ⚠️ It needs to have the Player Frame visible
+
+**Ebon Might as a standalone bar** ⚠️ It needs to have the Player Frame visible
 
 **Druid Form Adaptive Support:**  
 Automatically switches to Mana, Energy, Rage, or Astral Power depending on current shapeshift form.
