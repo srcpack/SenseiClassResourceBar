@@ -1,6 +1,6 @@
 local _, addonTable = ...
 
-local LEM = addonTable.LEM or LibStub("LibEditMode-SCRBFork")
+local LEM = addonTable.LEM or LibStub("LibEditMode")
 
 local HealthBarMixin = Mixin({}, addonTable.BarMixin)
 

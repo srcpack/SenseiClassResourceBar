@@ -1,5 +1,5 @@
-local MINOR = 11
-local lib, minor = LibStub('LibEditMode-SCRBFork')
+local MINOR = 10
+local lib, minor = LibStub('LibEditMode')
 if minor > MINOR then
 	return
 end

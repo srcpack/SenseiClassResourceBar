@@ -1,7 +1,7 @@
 local _, addonTable = ...
 
 local LSM = addonTable.LSM or LibStub("LibSharedMedia-3.0")
-local LEM = addonTable.LEM or LibStub("LibEditMode-SCRBFork")
+local LEM = addonTable.LEM or LibStub("LibEditMode")
 
 local LEMSettingsLoaderMixin = {}
 
@@ -497,21 +497,21 @@ function LEMSettingsLoaderMixin:Init(bar, defaults)
         bar:UpdateDisplay(layoutName, true)
     end)
 
-    LEM:RegisterCallback("rename", function(oldLayoutName, newLayoutName)
-        SenseiClassResourceBarDB[config.dbName][newLayoutName] = CopyTable(SenseiClassResourceBarDB[config.dbName][oldLayoutName])
-        SenseiClassResourceBarDB[config.dbName][oldLayoutName] = nil
-        bar:ApplyVisibilitySettings()
-        bar:ApplyLayout()
-        bar:UpdateDisplay()
-    end)
+    -- LEM:RegisterCallback("rename", function(oldLayoutName, newLayoutName)
+    --     SenseiClassResourceBarDB[config.dbName][newLayoutName] = CopyTable(SenseiClassResourceBarDB[config.dbName][oldLayoutName])
+    --     SenseiClassResourceBarDB[config.dbName][oldLayoutName] = nil
+    --     bar:ApplyVisibilitySettings()
+    --     bar:ApplyLayout()
+    --     bar:UpdateDisplay()
+    -- end)
 
-    LEM:RegisterCallback("delete", function(layoutName)
-        SenseiClassResourceBarDB[config.dbName] = SenseiClassResourceBarDB[config.dbName] or {}
-        SenseiClassResourceBarDB[config.dbName][layoutName] = nil
-        bar:ApplyVisibilitySettings()
-        bar:ApplyLayout()
-        bar:UpdateDisplay()
-    end)
+    -- LEM:RegisterCallback("delete", function(layoutName)
+    --     SenseiClassResourceBarDB[config.dbName] = SenseiClassResourceBarDB[config.dbName] or {}
+    --     SenseiClassResourceBarDB[config.dbName][layoutName] = nil
+    --     bar:ApplyVisibilitySettings()
+    --     bar:ApplyLayout()
+    --     bar:UpdateDisplay()
+    -- end)
 
     LEM:AddFrame(frame, OnPositionChanged, defaults)
 end
