@@ -4,5 +4,5 @@
 	<Include file="PrimaryBarTextColorSettings.xml"/>
 	<Include file="SecondaryBarTextColorSettings.xml"/>
 	<Include file="TertiaryBarTextColorSettings.xml"/>
-	<Include file="HealthBarTextColorSettings.xml"/>
+	<Include file="HealthBarColorSettings.xml"/>
 </Ui>

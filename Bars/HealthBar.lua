@@ -14,7 +14,7 @@ function HealthBarMixin:GetBarColor()
         local r,g, b = GetClassColor(playerClass)
         return { r = r, g = g, b = b }
     else
-        return { r = 0, g = 1, b = 0 }
+        return addonTable:GetOverrideHealthBarColor(addonTable.RegistereredBar.HealthBar.frameName, self:GetResource())
     end
 end
 

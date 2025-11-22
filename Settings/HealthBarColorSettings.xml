@@ -1,12 +1,12 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\..\Blizzard_SharedXML\UI.xsd">
-	<Script file="HealthBarTextColorSettings.lua"/>
+	<Script file="HealthBarColorSettings.lua"/>
 
-	<Frame name="SCRBHealthBarTextColorSettings" mixin="SCRBHealthBarTextColorSettingsMixin" virtual="true">
-		<Size x="200" y="60"/>
+	<Frame name="SCRBHealthBarColorSettings" mixin="SCRBHealthBarColorSettingsMixin" virtual="true">
+		<Size x="200" y="90"/>
 		<Layers>
 			<Layer level="ARTWORK">
-				<FontString parentKey="Header" inherits="GameFontNormal" justifyH="LEFT" text="Health Bar Text Color">
+				<FontString parentKey="Header" inherits="GameFontNormal" justifyH="LEFT" text="Health Bar Color">
 					<Size x="0" y="20"/>
 					<Anchors>
 						<Anchor point="TOPLEFT" x="37" y="0"/>
@@ -15,7 +15,7 @@
 			</Layer>
 		</Layers>
 		<Frames>
-			<Frame parentKey="SCRBHealthBarTextColorSetting" inherits="VerticalLayoutFrame">
+			<Frame parentKey="SCRBHealthBarColorSetting" inherits="VerticalLayoutFrame">
 				<Anchors>
 					<Anchor point="TOPLEFT" relativeKey="$parent.Header" relativePoint="BOTTOMLEFT" x="15" y="-10"/>
 				</Anchors>

@@ -1,7 +1,7 @@
 local _, addonTable = ...
 
 function addonTable:GetOverrideTextColor(frameName, textId)
-    local color = { r = 1, b = 1, g = 1}
+    local color = self:GetTextColor()
 
     local settings = SenseiClassResourceBarDB and SenseiClassResourceBarDB["_Settings"]
     local categorySettings = settings and settings[frameName]
@@ -18,8 +18,34 @@ function addonTable:GetOverrideTextColor(frameName, textId)
     return color
 end
 
+function addonTable:GetTextColor()
+    return { r = 1, b = 1, g = 1}
+end
+
+function addonTable:GetOverrideHealthBarColor(frameName, settingKey)
+    local color = self:GetHealthBarColor()
+
+    local settings = SenseiClassResourceBarDB and SenseiClassResourceBarDB["_Settings"]
+    local categorySettings = settings and settings[frameName]
+    local textColors = categorySettings and settings[frameName]["BarColors"]
+    local overrideColor = textColors and textColors[settingKey]
+
+    if overrideColor then
+        if overrideColor.r then color.r = overrideColor.r end
+        if overrideColor.g then color.g = overrideColor.g end
+        if overrideColor.b then color.b = overrideColor.b end
+        if overrideColor.a then color.a = overrideColor.a end
+    end
+
+    return color
+end
+
+function addonTable:GetHealthBarColor()
+    return { r = 0, g = 1, b = 0 }
+end
+
 function addonTable:GetOverrideResourceColor(resource)
-    local color, settingKey = addonTable:GetResourceColor(resource)
+    local color, settingKey = self:GetResourceColor(resource)
 
     local settings = SenseiClassResourceBarDB and SenseiClassResourceBarDB["_Settings"]
     local powerColors = settings and settings["PowerColors"]
