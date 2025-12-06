@@ -17,26 +17,11 @@ jobs:
       - name: Hack around https://github.com/actions/checkout/issues/290
         run: |
           git fetch --tags --force
-
-      - name: Get latest release info R41z0r/LibEQOL
-        id: release
-        run: |
-          API="https://api.github.com/repos/R41z0r/LibEQOL/releases/latest"
-          TAG=$(curl -s $API | jq -r .tag_name)
-          ASSET_URL=$(curl -s $API | jq -r '.assets[0].browser_download_url')
-
-          echo "tag=$TAG" >> $GITHUB_OUTPUT
-          echo "asset_url=$ASSET_URL" >> $GITHUB_OUTPUT
-
-      - name: Download release asset
-        run: |
-          mkdir -p Libs
-          curl -L "${{ steps.release.outputs.asset_url }}" -o LibEQOL.zip
-
-      - name: Extract into Libs/
-        run: |
-          unzip -o LibEQOL.zip -d Libs
-          rm LibEQOL.zip
+      
+      - name: Install LibEQOL
+        uses: R41z0r/LibEQOL@v1.0.0
+        with:
+          destination: Libs
 
       - name: Create Package and release
         uses: BigWigsMods/packager@v2
