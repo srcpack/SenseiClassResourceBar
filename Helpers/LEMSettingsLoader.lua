@@ -38,7 +38,25 @@ local function BuildLemSettings(bar, defaults)
         },
         {
             parentId = "Bar Visibility",
-            order = 103,
+            order = 102,
+            name = "Bar Strata",
+            kind = LEM.SettingType.Dropdown,
+            default = defaults.barStrata,
+            useOldStyle = true,
+            values = addonTable.availableBarStrataOptions,
+            get = function(layoutName)
+                return (SenseiClassResourceBarDB[config.dbName][layoutName] and SenseiClassResourceBarDB[config.dbName][layoutName].barStrata) or defaults.barStrata
+            end,
+            set = function(layoutName, value)
+                SenseiClassResourceBarDB[config.dbName][layoutName] = SenseiClassResourceBarDB[config.dbName][layoutName] or CopyTable(defaults)
+                SenseiClassResourceBarDB[config.dbName][layoutName].barStrata = value
+                bar:ApplyLayout(layoutName)
+            end,
+            tooltip = "The layer the bar is rendered on",
+        },
+        {
+            parentId = "Bar Visibility",
+            order = 104,
             name = "Hide While Mounted Or In Vehicule",
             kind = LEM.SettingType.Checkbox,
             default = defaults.hideWhileMountedOrVehicule,

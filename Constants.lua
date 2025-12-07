@@ -46,6 +46,7 @@ addonTable.commonDefaults = {
     y = 0,
     barVisible = "Always Visible",
     hideWhileMountedOrVehicule = false,
+    barStrata = "MEDIUM",
     scale = 1,
     width = 200,
     widthMode = "Manual",
@@ -75,6 +76,15 @@ addonTable.availableBarVisibilityOptions = {
     { text = "Has Target Selected", isRadio = true },
     { text = "Has Target Selected OR In Combat", isRadio = true },
     { text = "Hidden", isRadio = true },
+}
+
+addonTable.availableBarStrataOptions = {
+    { text = "TOOLTIP" , isRadio = true },
+    { text = "DIALOG" , isRadio = true },
+    { text = "HIGH" , isRadio = true },
+    { text = "MEDIUM" , isRadio = true },
+    { text = "LOW" , isRadio = true },
+    { text = "BACKGROUND" , isRadio = true },
 }
 
 addonTable.availableRoleOptions = {

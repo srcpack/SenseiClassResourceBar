@@ -93,7 +93,7 @@ addonTable.RegistereredBar.HealthBar = {
         return {
             {
                 parentId = "Bar Visibility",
-                order = 102,
+                order = 103,
                 name = "Hide On Role",
                 kind = LEM.SettingType.MultiDropdown,
                 default = defaults.hideHealthOnRole,
@@ -110,7 +110,7 @@ addonTable.RegistereredBar.HealthBar = {
             },
             {
                 parentId = "Bar Visibility",
-                order = 104,
+                order = 105,
                 name = "Hide Blizzard UI",
                 kind = LEM.SettingType.Checkbox,
                 default = defaults.hideBlizzardPlayerContainerUi,

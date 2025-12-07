@@ -187,7 +187,7 @@ addonTable.RegistereredBar.SecondaryResourceBar = {
         return {
             {
                 parentId = "Bar Visibility",
-                order = 102,
+                order = 103,
                 name = "Hide Mana On Role",
                 kind = LEM.SettingType.MultiDropdown,
                 default = defaults.hideManaOnRole,
@@ -204,7 +204,7 @@ addonTable.RegistereredBar.SecondaryResourceBar = {
             },
             {
                 parentId = "Bar Visibility",
-                order = 104,
+                order = 105,
                 name = "Hide Blizzard UI",
                 kind = LEM.SettingType.Checkbox,
                 default = defaults.hideBlizzardSecondaryResourceUi,

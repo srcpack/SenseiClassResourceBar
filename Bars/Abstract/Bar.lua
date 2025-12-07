@@ -57,7 +57,7 @@ function BarMixin:Init(config, parent, frameLevel)
     -- TEXT FRAME
     self.TextFrame = CreateFrame("Frame", nil, Frame)
     self.TextFrame:SetAllPoints(Frame)
-    self.TextFrame:SetFrameLevel(self.StatusBar:GetFrameLevel() + 2)
+    self.TextFrame:SetFrameLevel(self.StatusBar:GetFrameLevel())
 
     self.TextValue = self.TextFrame:CreateFontString(nil, "OVERLAY", "GameFontHighlightSmall")
     self.TextValue:SetPoint("CENTER", self.TextFrame, "CENTER", 0, 0)
@@ -135,6 +135,10 @@ end
 
 function BarMixin:IsShown()
     return self.Frame:IsShown()
+end
+
+function BarMixin:SetFrameStrata(strata)
+    self.Frame:SetFrameStrata(strata)
 end
 
 ------------------------------------------------------------
@@ -448,6 +452,7 @@ function BarMixin:ApplyLayout(layoutName, force)
     local uiWidth, uiHeight = UIParent:GetWidth() / 2, UIParent:GetHeight() / 2
     self.Frame:SetPoint(point, UIParent, point, addonTable.clamp(x, uiWidth * -1, uiWidth), addonTable.clamp(y, uiHeight * -1, uiHeight))
 
+    self:SetFrameStrata(data.barStrata or defaults.barStrata)
     self:ApplyFontSettings(layoutName)
     self:ApplyFillDirectionSettings(layoutName)
     self:ApplyMaskAndBorderSettings(layoutName)

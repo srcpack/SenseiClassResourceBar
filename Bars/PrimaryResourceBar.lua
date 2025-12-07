@@ -104,7 +104,7 @@ addonTable.RegistereredBar.PrimaryResourceBar = {
         return {
             {
                 parentId = "Bar Visibility",
-                order = 102,
+                order = 103,
                 name = "Hide Mana On Role",
                 kind = LEM.SettingType.MultiDropdown,
                 default = defaults.hideManaOnRole,
