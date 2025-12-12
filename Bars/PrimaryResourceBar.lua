@@ -74,7 +74,7 @@ function PrimaryResourceBarMixin:GetResourceValue(resource)
             if (buildVersion or 0) < 120000 then
                 return max, max, current, math.floor((current / max) * 100 + 0.5), "percent"
             else
-                return max, max, current, UnitPowerPercent("player", resource, false, true), "percent"
+                return max, max, current, UnitPowerPercent("player", resource, false, CurveConstants.ScaleTo100), "percent"
             end
         else
             return max, max, current, current, "number"
