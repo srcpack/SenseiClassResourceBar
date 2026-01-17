@@ -449,6 +449,9 @@ function BarMixin:ApplyLayout(layoutName, force)
     local width = nil
     if data.widthMode == "Sync With Essential Cooldowns" or data.widthMode == "Sync With Utility Cooldowns" then
         width = self:GetCooldownManagerWidth(layoutName) or data.width or defaults.width
+        if data.minWidth and data.minWidth > 0 then
+            width = max(width, data.minWidth)
+        end
     else -- Use manual width
         width = data.width or defaults.width
     end

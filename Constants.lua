@@ -53,6 +53,7 @@ addonTable.commonDefaults = {
     barStrata = "MEDIUM",
     scale = 1,
     width = 200,
+    minWidth = 0,
     widthMode = "Manual",
     height = 15,
     fillDirection = "Left to Right",
