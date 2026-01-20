@@ -47,14 +47,12 @@ function TertiaryResourceBarMixin:GetResourceValue(resource)
     if not data then return nil, nil, nil, nil, nil end
 
     if resource == "EBON_MIGHT" then
-        -- The hack needs the PlayerFrame
-        if not PlayerFrame:IsShown() then return nil, nil, nil, nil, nil end
-
-        local current = EvokerEbonMightBar:GetValue() 
-        local max = select(2, EvokerEbonMightBar:GetMinMaxValues()) -- Secret values
+        local auraData = C_UnitAuras.GetPlayerAuraBySpellID(395296) -- Ebon Might
+        local current = auraData and math.ceil((auraData.expirationTime - GetTime()) * 10) / 10 or 0
+        local max = 20
 
         if data.textFormat == "Percent" or data.textFormat == "Percent%" then
-            return max, max, current, string.format("%.0f", current), "custom"
+            return max, max, current, (current / max) * 100, "percent"
         else
             return max, max, current, current, "number"
         end

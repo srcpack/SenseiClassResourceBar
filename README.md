@@ -32,7 +32,7 @@ Mana, Rage, Energy, Focus, Fury, Runic Power, Astral Power, Maelstrom Weapon and
 *   **Druid** → Combo Points (Cat Form)
 *   **Demon Hunter** → Soul Fragments (Devourer)
 
-**Ebon Might as a standalone bar** ⚠️ It needs to have the Player Frame visible
+**Ebon Might as a standalone bar**
 
 **Druid Form Adaptive Support:**  
 Automatically switches to Mana, Energy, Rage, or Astral Power depending on current shapeshift form.
