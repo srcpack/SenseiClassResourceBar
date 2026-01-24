@@ -181,7 +181,6 @@ addonTable.getAvailableProfiles = function()
             local dbName = barSettings.dbName
             if SenseiClassResourceBarDB[dbName] then
                 for layoutName, _ in pairs(SenseiClassResourceBarDB[dbName]) do
-                    print(layoutName)
                     profiles[layoutName] = true
                 end
             end

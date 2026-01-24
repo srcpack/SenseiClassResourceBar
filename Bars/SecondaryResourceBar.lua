@@ -158,6 +158,39 @@ function SecondaryResourceBarMixin:GetResourceValue(resource)
     end
 end
 
+function SecondaryResourceBarMixin:GetPoint(layoutName)
+    local data = self:GetData(layoutName)
+
+    if data and data.positionMode ~= "Never" then
+        local primaryResource = addonTable.barInstances and addonTable.barInstances["PrimaryResourceBar"]
+
+        if primaryResource then
+                -- This works because visibility settings are applied before layout, so the secondary can know whether the primary is shown or not
+            if data.positionMode == "Use Primary Resource Bar Position If Hidden" and not primaryResource:IsShown() then
+                return primaryResource:GetPoint(layoutName)
+            end
+        end
+    end
+
+    return addonTable.PowerBarMixin.GetPoint(self, layoutName)
+end
+
+function SecondaryResourceBarMixin:OnShow()
+    local data = self:GetData()
+
+    if data and data.positionMode == "Use Primary Resource Bar Position If Hidden" then
+        self:ApplyLayout()
+    end
+end
+
+function SecondaryResourceBarMixin:OnHide()
+    local data = self:GetData()
+
+    if data and data.positionMode == "Use Primary Resource Bar Position If Hidden" then
+        self:ApplyLayout()
+    end
+end
+
 addonTable.SecondaryResourceBarMixin = SecondaryResourceBarMixin
 
 addonTable.RegisteredBar = addonTable.RegisteredBar or {}
@@ -171,6 +204,7 @@ addonTable.RegisteredBar.SecondaryResourceBar = {
         point = "CENTER",
         x = 0,
         y = -40,
+        positionMode = "Self",
         hideBlizzardSecondaryResourceUi = false,
         hideManaOnRole = {},
         showTicks = true,
@@ -221,6 +255,24 @@ addonTable.RegisteredBar.SecondaryResourceBar = {
                 tooltip = "Hides the default Blizzard secondary resource UI (e.g. Rune Frame for Death Knights)",
             },
             {
+                parentId = "Position & Size",
+                order = 201,
+                name = "Position",
+                kind = LEM.SettingType.Dropdown,
+                default = defaults.positionMode,
+                useOldStyle = true,
+                values = addonTable.availablePositionModeOptions,
+                get = function(layoutName)
+                    return (SenseiClassResourceBarDB[dbName][layoutName] and SenseiClassResourceBarDB[dbName][layoutName].positionMode) or defaults.positionMode
+                end,
+                set = function(layoutName, value)
+                    SenseiClassResourceBarDB[dbName][layoutName] = SenseiClassResourceBarDB[dbName][layoutName] or CopyTable(defaults)
+                    SenseiClassResourceBarDB[dbName][layoutName].positionMode = value
+                    bar:ApplyLayout(layoutName)
+                end,
+            },
+            {
+                name = "b",
                 parentId = "Bar Settings",
                 order = 304,
                 kind = LEM.SettingType.Divider,
@@ -304,6 +356,7 @@ addonTable.RegisteredBar.SecondaryResourceBar = {
                 tooltip = "Force the Percent format on Mana",
             },
             {
+                name = "c",
                 parentId = "Text Settings",
                 order = 406,
                 kind = LEM.SettingType.Divider,

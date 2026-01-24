@@ -126,10 +126,12 @@ end
 ------------------------------------------------------------
 
 function BarMixin:Show()
+    self:OnShow()
     self.Frame:Show()
 end
 
 function BarMixin:Hide()
+    self:OnHide()
     self.Frame:Hide()
 end
 
@@ -186,6 +188,12 @@ function BarMixin:GetResourceValue(_)
 end
 
 function BarMixin:OnLoad()
+end
+
+function BarMixin:OnShow()
+end
+
+function BarMixin:OnHide()
 end
 
 ---@param event string
@@ -436,6 +444,57 @@ end
 -- LAYOUT related methods
 ------------------------------------------------------------
 
+function BarMixin:GetPoint(layoutName)
+    local defaults = self.defaults or {}
+
+    local data = self:GetData(layoutName)
+    if not data then
+        return defaults.point or "CENTER",
+            addonTable.resolveRelativeFrames(defaults.relativeFrame or "UIParent"),
+            defaults.relativePoint or "CENTER",
+            defaults.x or 0,
+            defaults.y or 0
+    end
+
+    local x = data.x or defaults.x
+    local y = data.y or defaults.y
+
+    local point = data.point or defaults.point
+    local relativePoint = data.relativePoint or defaults.relativePoint
+    local relativeFrame = data.relativeFrame or defaults.relativeFrame
+    local resolvedRelativeFrame = addonTable.resolveRelativeFrames(relativeFrame) or UIParent
+    -- Cannot anchor to itself
+    if self.Frame == resolvedRelativeFrame then
+        resolvedRelativeFrame = UIParent
+    end
+
+    local uiWidth, uiHeight = UIParent:GetWidth() / 2, UIParent:GetHeight() / 2
+    return point, resolvedRelativeFrame, relativePoint, addonTable.clamp(x, uiWidth * -1, uiWidth), addonTable.clamp(y, uiHeight * -1, uiHeight)
+end
+
+function BarMixin:GetSize(layoutName)
+    local defaults = self.defaults or {}
+
+    local data = self:GetData(layoutName)
+    if not data then return defaults.width or 200, defaults.height or 15 end
+
+    local width = nil
+    if data.widthMode == "Sync With Essential Cooldowns" or data.widthMode == "Sync With Utility Cooldowns" then
+        width = self:GetCooldownManagerWidth(layoutName) or data.width or defaults.width
+        if data.minWidth and data.minWidth > 0 then
+            width = max(width, data.minWidth)
+        end
+    else -- Use manual width
+        width = data.width or defaults.width
+    end
+
+    local height = data.height or defaults.height
+
+    local scale = addonTable.rounded(data.scale or defaults.scale or 1)
+
+    return width * scale, height * scale
+end
+
 function BarMixin:ApplyLayout(layoutName, force)
     if not self:IsShown() and not force then return end
 
@@ -450,35 +509,15 @@ function BarMixin:ApplyLayout(layoutName, force)
 
     local defaults = self.defaults or {}
 
-    local scale = data.scale or defaults.scale
-    local point = data.point or defaults.point
-    local relativePoint = data.relativePoint or defaults.relativePoint
-    local relativeFrame = data.relativeFrame or defaults.relativeFrame
-    local resolvedRelativeFrame = addonTable.resolveRelativeFrames(relativeFrame) or UIParent
-    -- Cannot anchor to itself
-    if self.Frame == resolvedRelativeFrame then
-        resolvedRelativeFrame = UIParent
-    end
-    -- Disable drag & drop if the relative frame is not UIParent, due to LEM limitation making x and y position incorrect when dragging
-    LEM:SetFrameDragEnabled(self.Frame, resolvedRelativeFrame == UIParent)
+    local width, height = self:GetSize(layoutName)
+    self.Frame:SetSize(max(LEM:IsInEditMode() and 2 or 1, width), max(LEM:IsInEditMode() and 2 or 1, height))
 
-    local x = data.x or defaults.x
-    local y = data.y or defaults.y
-
-    local width = nil
-    if data.widthMode == "Sync With Essential Cooldowns" or data.widthMode == "Sync With Utility Cooldowns" then
-        width = self:GetCooldownManagerWidth(layoutName) or data.width or defaults.width
-        if data.minWidth and data.minWidth > 0 then
-            width = max(width, data.minWidth)
-        end
-    else -- Use manual width
-        width = data.width or defaults.width
-    end
-    local height = data.height or defaults.height
-    self.Frame:SetSize(max(LEM:IsInEditMode() and 2 or 1, width * scale), max(LEM:IsInEditMode() and 2 or 1, height * scale))
+    local point, relativeTo, relativePoint, x, y = self:GetPoint(layoutName)
     self.Frame:ClearAllPoints()
-    local uiWidth, uiHeight = UIParent:GetWidth() / 2, UIParent:GetHeight() / 2
-    self.Frame:SetPoint(point, resolvedRelativeFrame, relativePoint, addonTable.clamp(x, uiWidth * -1, uiWidth), addonTable.clamp(y, uiHeight * -1, uiHeight))
+    self.Frame:SetPoint(point, relativeTo, relativePoint, x, y)
+
+    -- Disable drag & drop if the relative frame is not UIParent, due to LEM limitation making x and y position incorrect when dragging
+    LEM:SetFrameDragEnabled(self.Frame, relativeTo == UIParent)
 
     self:SetFrameStrata(data.barStrata or defaults.barStrata)
     self:ApplyFontSettings(layoutName)

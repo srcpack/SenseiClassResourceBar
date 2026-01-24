@@ -42,6 +42,7 @@ InitLSM()
 ------------------------------------------------------------
 addonTable.commonDefaults = {
 	enableOverlayToggle = true,
+    settingsMaxHeight = select(2, GetPhysicalScreenSize()) * 0.6,
     point = "CENTER",
     relativeFrame = "UIParent",
     relativePoint = "CENTER",
@@ -97,6 +98,11 @@ addonTable.availableRoleOptions = {
     { text = "Tank", value = "TANK" },
     { text = "Healer", value = "HEALER" },
     { text = "DPS", value = "DAMAGER" },
+}
+
+addonTable.availablePositionModeOptions = {
+    { text = "Self" },
+    { text = "Use Primary Resource Bar Position If Hidden" },
 }
 
 addonTable.availableRelativeFrames = function(config)

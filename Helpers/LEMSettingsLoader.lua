@@ -82,7 +82,7 @@ local function BuildLemSettings(bar, defaults)
         },
         {
             parentId = "Position & Size",
-            order = 201,
+            order = 202,
             name = "X Position",
             kind = LEM.SettingType.Slider,
             default = defaults.x,
@@ -102,7 +102,7 @@ local function BuildLemSettings(bar, defaults)
         },
         {
             parentId = "Position & Size",
-            order = 202,
+            order = 203,
             name = "Y Position",
             kind = LEM.SettingType.Slider,
             default = defaults.y,
@@ -122,7 +122,7 @@ local function BuildLemSettings(bar, defaults)
         },
         {
             parentId = "Position & Size",
-            order = 203,
+            order = 204,
             name = "Relative Frame",
             kind = LEM.SettingType.Dropdown,
             default = defaults.relativeFrame,
@@ -143,10 +143,10 @@ local function BuildLemSettings(bar, defaults)
         },
         {
             parentId = "Position & Size",
-            order = 204,
+            order = 205,
             name = "Anchor Point",
             kind = LEM.SettingType.Dropdown,
-            default = defaults.availableAnchorPoints,
+            default = defaults.point,
             useOldStyle = true,
             values = addonTable.availableAnchorPoints,
             get = function(layoutName)
@@ -160,7 +160,7 @@ local function BuildLemSettings(bar, defaults)
         },
         {
             parentId = "Position & Size",
-            order = 205,
+            order = 206,
             name = "Relative Point",
             kind = LEM.SettingType.Dropdown,
             default = defaults.relativePoint,
@@ -177,12 +177,12 @@ local function BuildLemSettings(bar, defaults)
         },
         {
             parentId = "Position & Size",
-            order = 206,
+            order = 210,
             kind = LEM.SettingType.Divider,
         },
         {
             parentId = "Position & Size",
-            order = 207,
+            order = 211,
             name = "Bar Size",
             kind = LEM.SettingType.Slider,
             default = defaults.scale,
@@ -204,7 +204,7 @@ local function BuildLemSettings(bar, defaults)
         },
         {
             parentId = "Position & Size",
-            order = 208,
+            order = 212,
             name = "Width Mode",
             kind = LEM.SettingType.Dropdown,
             default = defaults.widthMode,
@@ -221,7 +221,7 @@ local function BuildLemSettings(bar, defaults)
         },
         {
             parentId = "Position & Size",
-            order = 209,
+            order = 213,
             name = "Width",
             kind = LEM.SettingType.Slider,
             default = defaults.width,
@@ -245,7 +245,7 @@ local function BuildLemSettings(bar, defaults)
         },
         {
             parentId = "Position & Size",
-            order = 210,
+            order = 214,
             name = "Minimum Width",
             kind = LEM.SettingType.Slider,
             default = defaults.minWidth,
@@ -270,7 +270,7 @@ local function BuildLemSettings(bar, defaults)
         },
         {
             parentId = "Position & Size",
-            order = 211,
+            order = 215,
             name = "Height",
             kind = LEM.SettingType.Slider,
             default = defaults.height,
