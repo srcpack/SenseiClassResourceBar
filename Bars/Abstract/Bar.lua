@@ -267,16 +267,16 @@ function BarMixin:UpdateDisplay(layoutName, force)
     local precision = data.textPrecision and math.max(0, string.len(data.textPrecision) - 3) or 0
     local tagValues = self:GetTagValues(resource, max, current, precision)
 
-    local textFormat = "[percent] | [current] | [max]"
-    -- if (data.showManaAsPercent and resource == Enum.PowerType.Mana) or data.textFormat == "Percent" or data.textFormat == "Percent%" then
-    --     textFormat = "[percent]" .. (data.textFormat == "Percent%" and "%" or "")
-    -- elseif data.textFormat == nil or data.textFormat == "Current" then
-    --     textFormat = "[current]"
-    -- elseif data.textFormat == "Current / Maximum" then
-    --     textFormat = "[current] / [max]"
-    -- elseif data.textFormat == "Current - Percent" or data.textFormat == "Current - Percent%" then
-    --     textFormat = "[current] - [percent]" .. (data.textFormat == "Current - Percent%" and "%" or "")
-    -- end
+    local textFormat = ""
+    if (data.showManaAsPercent and resource == Enum.PowerType.Mana) or data.textFormat == "Percent" or data.textFormat == "Percent%" then
+        textFormat = "[percent]" .. (data.textFormat == "Percent%" and "%" or "")
+    elseif data.textFormat == nil or data.textFormat == "Current" then
+        textFormat = "[current]"
+    elseif data.textFormat == "Current / Maximum" then
+        textFormat = "[current] / [max]"
+    elseif data.textFormat == "Current - Percent" or data.textFormat == "Current - Percent%" then
+        textFormat = "[current] - [percent]" .. (data.textFormat == "Current - Percent%" and "%" or "")
+    end
 
     -- Thanks oUF
     local valuesToDisplay = {}
