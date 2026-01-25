@@ -121,6 +121,7 @@ local baseLocale = {
     ["CATEGORY_TEXT_SETTINGS"] = "Text Settings",
     ["SHOW_RESOURCE_NUMBER"] = "Show Resource Number",
     ["RESOURCE_NUMBER_FORMAT"] = "Format",
+    ["RESOURCE_NUMBER_FORMAT_TOOLTIP"] = "Some resources do no support the percent format",
     ["RESOURCE_NUMBER_PRECISION"] = "Precision",
     ["RESOURCE_NUMBER_ALIGNMENT"] = "Alignment",
     ["SHOW_MANA_AS_PERCENT"] = "Show Mana As Percent",
