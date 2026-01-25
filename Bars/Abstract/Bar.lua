@@ -8,7 +8,6 @@ local LEM = addonTable.LEM or LibStub("LibEQOLEditMode-1.0")
 ------------------------------------------------------------
 
 local BarMixin = {}
-local buildVersion = select(4, GetBuildInfo())
 
 ------------------------------------------------------------
 -- BAR FACTORY
@@ -259,8 +258,8 @@ function BarMixin:UpdateDisplay(layoutName, force)
         return
     end
 
-    self.StatusBar:SetMinMaxValues(0, max, data.smoothProgress and buildVersion >= 120000 and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
-    self.StatusBar:SetValue(current, data.smoothProgress and buildVersion >= 120000 and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
+    self.StatusBar:SetMinMaxValues(0, max, data.smoothProgress and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
+    self.StatusBar:SetValue(current, data.smoothProgress and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
 
     -----------
 
@@ -983,7 +982,7 @@ function BarMixin:UpdateFragmentedPowerDisplay(layoutName)
                 cpFrame:SetMinMaxValues(0, 1)
 
                 if chargedLookup[idx] then
-                    cpFrame:SetValue(1, data.smoothProgress and buildVersion >= 120000 and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
+                    cpFrame:SetValue(1, data.smoothProgress and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
                     if idx <= current then
                         cpFrame:SetStatusBarColor(overchargedCpColor.r, overchargedCpColor.g, overchargedCpColor.b, overchargedCpColor.a or 1)
                     else
@@ -991,10 +990,10 @@ function BarMixin:UpdateFragmentedPowerDisplay(layoutName)
                     end
                 else
                     if idx <= current then
-                        cpFrame:SetValue(1, data.smoothProgress and buildVersion >= 120000 and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
+                        cpFrame:SetValue(1, data.smoothProgress and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
                         cpFrame:SetStatusBarColor(color.r, color.g, color.b, color.a or 1)
                     else
-                        cpFrame:SetValue(0, data.smoothProgress and buildVersion >= 120000 and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
+                        cpFrame:SetValue(0, data.smoothProgress and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
                         cpFrame:SetStatusBarColor(color.r * 0.5, color.g * 0.5, color.b * 0.5, color.a or 1)
                     end
                 end
@@ -1070,19 +1069,19 @@ function BarMixin:UpdateFragmentedPowerDisplay(layoutName)
 
                 if state == "full" then
                     essFrame:Hide()
-                    essFrame:SetValue(1, data.smoothProgress and buildVersion >= 120000 and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
+                    essFrame:SetValue(1, data.smoothProgress and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
                     essFrame:SetStatusBarColor(color.r, color.g, color.b, color.a or 1)
                     essText:SetFormattedText("")
                 elseif state == "partial" then
                     essFrame:Show()
                     local remaining = math.max(0, self._NextEssenceTick - now)
                     local value = 1 - (remaining / tickDuration)
-                    essFrame:SetValue(value, data.smoothProgress and buildVersion >= 120000 and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
+                    essFrame:SetValue(value, data.smoothProgress and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
                     essFrame:SetStatusBarColor(color.r * 0.5, color.g * 0.5, color.b * 0.5, color.a or 1)
                     essText:SetFormattedText(string.format("%." .. (precision or 1) .. "f", remaining))
                 else
                     essFrame:Show()
-                    essFrame:SetValue(0, data.smoothProgress and buildVersion >= 120000 and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
+                    essFrame:SetValue(0, data.smoothProgress and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
                     essFrame:SetStatusBarColor(color.r * 0.5, color.g * 0.5, color.b * 0.5, color.a or 1)
                     essText:SetFormattedText("")
                 end
@@ -1155,7 +1154,7 @@ function BarMixin:UpdateFragmentedPowerDisplay(layoutName)
                 runeFrame:SetMinMaxValues(0, 1)
                 if readyLookup[runeIndex] then
                     runeFrame:Hide()
-                    runeFrame:SetValue(1, data.smoothProgress and buildVersion >= 120000 and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
+                    runeFrame:SetValue(1, data.smoothProgress and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
                     runeText:SetFormattedText("")
                     runeFrame:SetStatusBarColor(color.r, color.g, color.b, color.a or 1)
                 else
@@ -1163,10 +1162,10 @@ function BarMixin:UpdateFragmentedPowerDisplay(layoutName)
                     local cdInfo = cdLookup[runeIndex]
                     runeFrame:SetStatusBarColor(color.r * 0.5, color.g * 0.5, color.b * 0.5, color.a or 1)
                     if cdInfo then
-                        runeFrame:SetValue(cdInfo.frac, data.smoothProgress and buildVersion >= 120000 and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
+                        runeFrame:SetValue(cdInfo.frac, data.smoothProgress and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
                         runeText:SetFormattedText(string.format("%." .. (precision or 1) .. "f", math.max(0, cdInfo.remaining)))
                     else
-                        runeFrame:SetValue(0, data.smoothProgress and buildVersion >= 120000 and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
+                        runeFrame:SetValue(0, data.smoothProgress and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
                         runeText:SetFormattedText("")
                     end
                 end
@@ -1207,14 +1206,14 @@ function BarMixin:UpdateFragmentedPowerDisplay(layoutName)
                 mwFrame:SetMinMaxValues(0, 1)
 
                 if idx <= current then
-                    mwFrame:SetValue(1, data.smoothProgress and buildVersion >= 120000 and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
+                    mwFrame:SetValue(1, data.smoothProgress and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
                     if current > 5 and idx <= math.fmod(current - 1, 5) + 1 then
                         mwFrame:SetStatusBarColor(above5MwColor.r, above5MwColor.g, above5MwColor.b, above5MwColor.a or 1)
                     else
                         mwFrame:SetStatusBarColor(color.r, color.g, color.b, color.a or 1)
                     end
                 else
-                    mwFrame:SetValue(0, data.smoothProgress and buildVersion >= 120000 and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
+                    mwFrame:SetValue(0, data.smoothProgress and Enum.StatusBarInterpolation.ExponentialEaseOut or nil)
                     mwFrame:SetStatusBarColor(color.r * 0.5, color.g * 0.5, color.b * 0.5, color.a or 1)
                 end
                 mwText:SetFormattedText("")

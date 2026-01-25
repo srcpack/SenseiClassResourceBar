@@ -3,7 +3,6 @@ local _, addonTable = ...
 local LEM = addonTable.LEM or LibStub("LibEQOLEditMode-1.0")
 
 local TertiaryResourceBarMixin = Mixin({}, addonTable.PowerBarMixin)
-local buildVersion = select(4, GetBuildInfo())
 
 function TertiaryResourceBarMixin:GetResource()
     local playerClass = select(2, UnitClass("player"))

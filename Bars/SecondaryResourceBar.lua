@@ -3,7 +3,6 @@ local _, addonTable = ...
 local LEM = addonTable.LEM or LibStub("LibEQOLEditMode-1.0")
 
 local SecondaryResourceBarMixin = Mixin({}, addonTable.PowerBarMixin)
-local buildVersion = select(4, GetBuildInfo())
 
 function SecondaryResourceBarMixin:GetResource()
     local playerClass = select(2, UnitClass("player"))
@@ -161,6 +160,7 @@ function SecondaryResourceBarMixin:GetPoint(layoutName)
         local primaryResource = addonTable.barInstances and addonTable.barInstances["PrimaryResourceBar"]
 
         if primaryResource then
+            print(not primaryResource:IsShown())
             -- This works because visibility settings are applied before layout, so the secondary can know whether the primary is shown or not
             if not primaryResource:IsShown() then
                 return primaryResource:GetPoint(layoutName)

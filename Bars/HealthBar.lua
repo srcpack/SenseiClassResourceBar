@@ -3,7 +3,6 @@ local _, addonTable = ...
 local LEM = addonTable.LEM or LibStub("LibEQOLEditMode-1.0")
 
 local HealthBarMixin = Mixin({}, addonTable.BarMixin)
-local buildVersion = select(4, GetBuildInfo())
 
 function HealthBarMixin:GetBarColor()
     local playerClass = select(2, UnitClass("player"))

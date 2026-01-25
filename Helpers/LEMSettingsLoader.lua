@@ -4,7 +4,6 @@ local LSM = addonTable.LSM or LibStub("LibSharedMedia-3.0")
 local LEM = addonTable.LEM or LibStub("LibEQOLEditMode-1.0")
 
 local LEMSettingsLoaderMixin = {}
-local buildVersion = select(4, GetBuildInfo())
 
 local function BuildLemSettings(bar, defaults)
     local config = bar:GetConfig()
@@ -353,9 +352,6 @@ local function BuildLemSettings(bar, defaults)
             set = function(layoutName, value)
                 SenseiClassResourceBarDB[config.dbName][layoutName] = SenseiClassResourceBarDB[config.dbName][layoutName] or CopyTable(defaults)
                 SenseiClassResourceBarDB[config.dbName][layoutName].smoothProgress = value
-            end,
-            isShown = function()
-                return buildVersion >= 120000
             end,
         },
         {
