@@ -842,6 +842,7 @@ function LEMSettingsLoaderMixin:Init(bar, defaults)
 
     LEM:RegisterCallback("layout", function(layoutName)
         SenseiClassResourceBarDB[config.dbName][layoutName] = SenseiClassResourceBarDB[config.dbName][layoutName] or CopyTable(defaults)
+        bar:OnLayoutChange(layoutName)
         bar:InitCooldownManagerWidthHook(layoutName)
         bar:ApplyVisibilitySettings(layoutName)
         bar:ApplyLayout(layoutName, true)

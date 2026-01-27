@@ -233,6 +233,10 @@ end
 function BarMixin:OnHide()
 end
 
+--- @param _ string The new layout
+function BarMixin:OnLayoutChange(_)
+end
+
 ---@param event string
 ---@param ... any
 function BarMixin:OnEvent(event, ...)
