@@ -59,9 +59,9 @@ function PowerBarMixin:GetTagValues(resource, max, current, precision)
     local currentStr = string.format("%s", AbbreviateNumbers(current))
     local maxStr = string.format("%s", AbbreviateNumbers(max))
     local percentStr
-    if issecretvalue(max) or issecretvalue(current) then
+    if type(resource) == "number" and (issecretvalue(max) or issecretvalue(current)) then
         percentStr = string.format(pFormat, UnitPowerPercent("player", resource, true, CurveConstants.ScaleTo100))
-    elseif max ~= 0 then
+    elseif not issecretvalue(max) and not issecretvalue(current) and max ~= 0 then
         percentStr = string.format(pFormat, (current / max) * 100)
     else
         percentStr = ''
